@@ -1,0 +1,10 @@
+.input {
+  width: 200px;
+}
+.button {
+  margin-left: 5px;
+}
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

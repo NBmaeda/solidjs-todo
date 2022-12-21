@@ -1,12 +1,19 @@
-import type { Component } from "solid-js";
-import { Show } from "solid-js";
+import { Component, onMount, Show, For } from "solid-js";
+import useTodos from "../../lib/todos";
 import TodoItem from "./TodoItem";
 
 const TodoList: Component = () => {
+  const { todos, fetchTodos } = useTodos;
+  onMount(() => {
+    fetchTodos();
+  });
   return (
-    <Show when={true} fallback={<p>まだTodoが登録されていません。</p>}>
+    <Show
+      when={todos() !== undefined}
+      fallback={<p>まだTodoが登録されていません。</p>}
+    >
       <ul class="list">
-        <TodoItem />
+        <For each={todos()}>{(todo) => <TodoItem {...todo} />}</For>
       </ul>
     </Show>
   );

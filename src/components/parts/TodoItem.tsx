@@ -1,13 +1,31 @@
-import { Component } from "solid-js";
+/** @jsxImportSource solid-js */
+import { Component, splitProps } from "solid-js";
+import type { Todo } from "../../lib/types";
+import useTodos from "../../lib/todos";
+import styles from "./TodoItem.module.css";
 
-const TodoItem: Component = () => {
+const TodoItem: Component<Todo> = (props: Todo) => {
+  const [local, others] = splitProps(props, ["title", "id", "completed"]);
+  const { todos, fetchTodos } = useTodos;
+
   return (
     <li class="listItem">
-      <label class="label">
-        <input type="checkbox" class="checkbox" name="id" />
-        <span class="title">todo title</span>
+      <label class={styles.label}>
+        <input
+          type="checkbox"
+          class={styles.checkbox}
+          name={local.id}
+          checked={local.completed}
+        />
+        <span class={styles.title}>{local.title}</span>
       </label>
-      <button class="button"> 削除 </button>
+      <button
+        class={styles.button}
+        onClick={() => console.log("deleeeeet!")}
+        name={local.id}
+      >
+        削除
+      </button>
     </li>
   );
 };
