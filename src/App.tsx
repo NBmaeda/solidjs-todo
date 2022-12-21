@@ -7,6 +7,8 @@ import styles from "./App.module.css";
 const App: Component = () => {
   console.log(process.env.VITE_VERCEL_URL);
   console.log(process.env.VITE_VERCEL_ENV);
+  console.log(import.meta.env.VITE_VERCEL_URL);
+  console.log(import.meta.env.VITE_VERCEL_ENV);
   return (
     <>
       <Header />
