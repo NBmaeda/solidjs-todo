@@ -57,34 +57,48 @@ const createTodos = () => {
     }
   };
 
-  // export const deleteCompletedTodo = async (e: Event) => {
-  // e.preventDefault();
-  //   try {
-  //     const { error } = await supabaseClient.from('todos').delete().match({ completed: true });
-  //     if (error) throw error;
-  //     fetchTodos();
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  // };
+  const deleteCompletedTodo: JSX.EventHandlerUnion<
+    HTMLButtonElement,
+    MouseEvent
+  > = async (e) => {
+    e.preventDefault();
+    try {
+      const { error } = await supabaseClient
+        .from("todos")
+        .delete()
+        .match({ completed: true });
+      if (error) throw error;
+      fetchTodos();
+    } catch (error) {
+      alert(error);
+    }
+  };
 
-  // export const toggleCompleted = async (
-  //   e: Event & { currentTarget: EventTarget & HTMLInputElement }
-  // ) => {
-  // e.preventDefault();
-  //   try {
-  //     const { error } = await supabaseClient
-  //       .from('todos')
-  //       .update({ completed: e.currentTarget.checked })
-  //       .eq('id', e.currentTarget.name);
-  //     if (error) throw error;
-  //     fetchTodos();
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  // };
+  const toggleCompleted: JSX.EventHandlerUnion<
+    HTMLInputElement,
+    Event
+  > = async (e) => {
+    e.preventDefault();
+    try {
+      const { error } = await supabaseClient
+        .from("todos")
+        .update({ completed: e.currentTarget.checked })
+        .eq("id", e.currentTarget.name);
+      if (error) throw error;
+      fetchTodos();
+    } catch (error) {
+      alert(error);
+    }
+  };
 
-  return { todos, fetchTodos, addTodo, deleteTodo };
+  return {
+    todos,
+    fetchTodos,
+    addTodo,
+    deleteTodo,
+    deleteCompletedTodo,
+    toggleCompleted,
+  };
 };
 
 export default createRoot(createTodos);

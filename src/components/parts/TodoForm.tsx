@@ -1,10 +1,10 @@
-import { Component, JSX, createSignal, createEffect } from "solid-js";
+import { Component } from "solid-js";
 import useTodoTitle from "../../lib/useTodoTitle";
 import useTodos from "../../lib/useTodos";
 
 const TodoForm: Component = () => {
   const { todoTitle, inputTodoTitle } = useTodoTitle;
-  const { addTodo } = useTodos;
+  const { addTodo, deleteCompletedTodo } = useTodos;
   return (
     <form class="form" onSubmit={addTodo}>
       <input
@@ -16,10 +16,9 @@ const TodoForm: Component = () => {
         class="input"
       />
       <button type="submit" class="button">
-        {" "}
-        Todoを追加{" "}
+        Todoを追加
       </button>
-      <button type="button" class="button">
+      <button type="button" class="button" onClick={deleteCompletedTodo}>
         完了済みのTodoを削除
       </button>
     </form>

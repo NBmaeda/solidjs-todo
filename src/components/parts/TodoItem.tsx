@@ -6,7 +6,7 @@ import styles from "./TodoItem.module.css";
 
 const TodoItem: Component<Todo> = (props: Todo) => {
   const [local, others] = splitProps(props, ["title", "id", "completed"]);
-  const { deleteTodo } = useTodos;
+  const { deleteTodo, toggleCompleted } = useTodos;
 
   return (
     <li class="listItem">
@@ -16,6 +16,7 @@ const TodoItem: Component<Todo> = (props: Todo) => {
           class={styles.checkbox}
           name={local.id}
           checked={local.completed}
+          onChange={toggleCompleted}
         />
         <span class={styles.title}>{local.title}</span>
       </label>
