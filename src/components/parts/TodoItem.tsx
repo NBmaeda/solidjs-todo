@@ -6,7 +6,7 @@ import styles from "./TodoItem.module.css";
 
 const TodoItem: Component<Todo> = (props: Todo) => {
   const [local, others] = splitProps(props, ["title", "id", "completed"]);
-  const { todos, fetchTodos } = useTodos;
+  const { deleteTodo } = useTodos;
 
   return (
     <li class="listItem">
@@ -19,11 +19,7 @@ const TodoItem: Component<Todo> = (props: Todo) => {
         />
         <span class={styles.title}>{local.title}</span>
       </label>
-      <button
-        class={styles.button}
-        onClick={() => console.log("deleeeeet!")}
-        name={local.id}
-      >
+      <button class={styles.button} onClick={deleteTodo} name={local.id}>
         削除
       </button>
     </li>

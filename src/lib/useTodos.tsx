@@ -40,17 +40,25 @@ const createTodos = () => {
     }
   };
 
-  // export const deleteTodo = async (e: Event & { currentTarget: EventTarget & HTMLButtonElement }) => {
-  //   try {
-  //     const { error } = await supabaseClient.from('todos').delete().match({ id: e.currentTarget.name });
-  //     if (error) throw error;
-  //     fetchTodos();
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  // };
+  const deleteTodo: JSX.EventHandlerUnion<
+    HTMLButtonElement,
+    MouseEvent
+  > = async (e) => {
+    e.preventDefault();
+    try {
+      const { error } = await supabaseClient
+        .from("todos")
+        .delete()
+        .match({ id: e.currentTarget.name });
+      if (error) throw error;
+      fetchTodos();
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   // export const deleteCompletedTodo = async (e: Event) => {
+  // e.preventDefault();
   //   try {
   //     const { error } = await supabaseClient.from('todos').delete().match({ completed: true });
   //     if (error) throw error;
@@ -63,6 +71,7 @@ const createTodos = () => {
   // export const toggleCompleted = async (
   //   e: Event & { currentTarget: EventTarget & HTMLInputElement }
   // ) => {
+  // e.preventDefault();
   //   try {
   //     const { error } = await supabaseClient
   //       .from('todos')
@@ -75,7 +84,7 @@ const createTodos = () => {
   //   }
   // };
 
-  return { todos, fetchTodos, addTodo };
+  return { todos, fetchTodos, addTodo, deleteTodo };
 };
 
 export default createRoot(createTodos);
