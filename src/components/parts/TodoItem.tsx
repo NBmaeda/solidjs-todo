@@ -1,7 +1,7 @@
 /** @jsxImportSource solid-js */
 import { Component, splitProps } from "solid-js";
 import type { Todo } from "../../lib/types";
-import useTodos from "../../lib/todos";
+import useTodos from "../../lib/useTodos";
 import styles from "./TodoItem.module.css";
 
 const TodoItem: Component<Todo> = (props: Todo) => {

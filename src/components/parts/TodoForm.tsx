@@ -1,13 +1,18 @@
-import type { Component } from "solid-js";
+import { Component, JSX, createSignal, createEffect } from "solid-js";
+import useTodoTitle from "../../lib/useTodoTitle";
+import useTodos from "../../lib/useTodos";
 
 const TodoForm: Component = () => {
+  const { todoTitle, inputTodoTitle } = useTodoTitle;
+  const { addTodo } = useTodos;
   return (
-    <form class="form">
+    <form class="form" onSubmit={addTodo}>
       <input
         type="text"
         name="todoname"
         placeholder="Todoを登録する"
-        value="title"
+        value={todoTitle()}
+        onInput={inputTodoTitle}
         class="input"
       />
       <button type="submit" class="button">

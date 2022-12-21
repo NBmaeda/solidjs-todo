@@ -5,8 +5,6 @@ import TodoList from "./components/parts/TodoList";
 import styles from "./App.module.css";
 
 const App: Component = () => {
-  console.log(import.meta.env.VITE_VERCEL_URL);
-  console.log(import.meta.env.VITE_VERCEL_ENV);
   return (
     <>
       <Header />
