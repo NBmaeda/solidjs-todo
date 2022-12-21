@@ -1,6 +1,7 @@
 import { Component } from "solid-js";
 import useTodoTitle from "../../lib/useTodoTitle";
 import useTodos from "../../lib/useTodos";
+import styles from "./TodoForm.module.css";
 
 const TodoForm: Component = () => {
   const { todoTitle, inputTodoTitle } = useTodoTitle;
@@ -13,12 +14,20 @@ const TodoForm: Component = () => {
         placeholder="Todoを登録する"
         value={todoTitle()}
         onInput={inputTodoTitle}
-        class="input"
+        class={styles.input}
       />
-      <button type="submit" class="button">
+      <button
+        type="submit"
+        class={`${styles.button} button`}
+        disabled={!todoTitle()}
+      >
         Todoを追加
       </button>
-      <button type="button" class="button" onClick={deleteCompletedTodo}>
+      <button
+        type="button"
+        class={`${styles.button} button`}
+        onClick={deleteCompletedTodo}
+      >
         完了済みのTodoを削除
       </button>
     </form>

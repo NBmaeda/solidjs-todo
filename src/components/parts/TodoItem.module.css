@@ -1,3 +1,11 @@
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.listItem + .listItem {
+  margin-top: 10px;
+}
 .label {
   display: flex;
   align-items: center;

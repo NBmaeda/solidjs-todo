@@ -8,10 +8,11 @@ const App: Component = () => {
   return (
     <>
       <Header />
-      <section class="container"></section>
-      <h2 class="title">Todo一覧</h2>
-      <TodoForm />
-      <TodoList />
+      <section class={styles.container}>
+        <h2 class={styles.stitle}>Todo一覧</h2>
+        <TodoForm />
+        <TodoList />
+      </section>
     </>
   );
 };

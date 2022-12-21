@@ -9,7 +9,7 @@ const TodoItem: Component<Todo> = (props: Todo) => {
   const { deleteTodo, toggleCompleted } = useTodos;
 
   return (
-    <li class="listItem">
+    <li class={styles.listItem}>
       <label class={styles.label}>
         <input
           type="checkbox"
@@ -20,7 +20,11 @@ const TodoItem: Component<Todo> = (props: Todo) => {
         />
         <span class={styles.title}>{local.title}</span>
       </label>
-      <button class={styles.button} onClick={deleteTodo} name={local.id}>
+      <button
+        class={`${styles.button} button`}
+        onClick={deleteTodo}
+        name={local.id}
+      >
         削除
       </button>
     </li>
