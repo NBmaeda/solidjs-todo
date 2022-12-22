@@ -7,7 +7,7 @@ import styles from "./TodoItem.module.css";
 const TodoItem: Component<Todo> = (props: Todo) => {
   const [local, others] = splitProps(props, ["title", "id", "completed"]);
   const { deleteTodo, toggleCompleted } = useTodos;
-
+  console.log(local.completed);
   return (
     <li class={styles.listItem}>
       <label class={styles.label}>

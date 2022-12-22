@@ -95,7 +95,7 @@ const createTodos = () => {
         .select();
       if (error) throw error;
       const newTodos = (todos() as Todo[]).map((todo) => {
-        if (todo.id !== data[0].id) {
+        if (todo.id === data[0].id) {
           todo.completed = !todo.completed;
         }
         return todo;
