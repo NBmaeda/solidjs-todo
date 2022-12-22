@@ -28,10 +28,11 @@ const createTodos = () => {
       try {
         const { data, error } = await supabaseClient
           .from("todos")
-          .insert({ title: todoTitle(), completed: false });
+          .insert({ title: todoTitle(), completed: false })
+          .select();
         if (error) throw error;
+        setTodos([data[0], ...(todos() as Todo[])]);
         setTodoTitle("");
-        fetchTodos();
       } catch (error) {
         alert(error);
       }
@@ -46,12 +47,16 @@ const createTodos = () => {
   > = async (e) => {
     e.preventDefault();
     try {
-      const { error } = await supabaseClient
+      const { data, error } = await supabaseClient
         .from("todos")
         .delete()
-        .match({ id: e.currentTarget.name });
+        .match({ id: e.currentTarget.name })
+        .select();
       if (error) throw error;
-      fetchTodos();
+      const newTodos = (todos() as Todo[]).filter(
+        (todo) => todo.id !== data[0].id
+      );
+      setTodos(newTodos);
     } catch (error) {
       alert(error);
     }
@@ -68,7 +73,10 @@ const createTodos = () => {
         .delete()
         .match({ completed: true });
       if (error) throw error;
-      fetchTodos();
+      const newTodos = (todos() as Todo[]).filter(
+        (todo) => todo.completed === false
+      );
+      setTodos(newTodos);
     } catch (error) {
       alert(error);
     }
@@ -80,12 +88,19 @@ const createTodos = () => {
   > = async (e) => {
     e.preventDefault();
     try {
-      const { error } = await supabaseClient
+      const { data, error } = await supabaseClient
         .from("todos")
         .update({ completed: e.currentTarget.checked })
-        .eq("id", e.currentTarget.name);
+        .eq("id", e.currentTarget.name)
+        .select();
       if (error) throw error;
-      fetchTodos();
+      const newTodos = (todos() as Todo[]).map((todo) => {
+        if (todo.id !== data[0].id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      });
+      setTodos(newTodos);
     } catch (error) {
       alert(error);
     }
